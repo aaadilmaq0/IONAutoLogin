@@ -213,7 +213,7 @@ public class MainActivity extends AppCompatActivity {
             intent.putExtra(Intent.EXTRA_TEXT, "");
             startActivity(Intent.createChooser(intent, "Choose an Email client :"));
         } else if (id == R.id.action_github) {
-            String url = "http://www.example.com";
+            String url = "https://github.com/kunall17/IONAutoLogin";
             Intent i = new Intent(Intent.ACTION_VIEW);
             i.setData(Uri.parse(url));
             startActivity(i);
