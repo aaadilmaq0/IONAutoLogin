@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="check_timeInterval">
+        <item>1 Min</item>
+        <item>5 Min</item>
+        <item>10 Min</item>
+        <item>15 Min</item>
+    </string-array>
+    <string-array name="check_timeInterval_values">
+        <item>1</item>
+        <item>5</item>
+        <item>10</item>
+        <item>15</item>
+    </string-array>
+</resources>

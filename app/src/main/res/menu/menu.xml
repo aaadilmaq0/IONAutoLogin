@@ -1,0 +1,42 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <item
+        android:id="@+id/action_log"
+        android:orderInCategory="100"
+        android:title="LOG"
+        app:showAsAction="never" />
+
+
+    <item
+        android:id="@+id/action_login"
+        android:icon="@drawable/ic_input_white_48dp"
+        android:orderInCategory="100"
+        android:title="Login"
+        app:showAsAction="ifRoom" />
+    <!--<item-->
+    <!--android:id="@+id/action_refresh"-->
+    <!--android:orderInCategory="100"-->
+    <!--android:title="Refresh"-->
+    <!--app:showAsAction="never" />-->
+
+    <item
+        android:id="@+id/action_contact"
+        android:autoLink="web|email"
+        android:orderInCategory="100"
+        android:title="Contact"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/action_github"
+        android:autoLink="web|email"
+        android:orderInCategory="100"
+        android:title="Github"
+        app:showAsAction="never" />
+    <!--<item-->
+    <!--android:id="@+id/search"-->
+    <!--android:title="@string/search_title"-->
+    <!--android:icon="@drawable/"-->
+    <!--app:showAsAction="collapseActionView|ifRoom"-->
+    <!--app:actionViewClass="android.support.v7.widget.SearchView"/>-->
+</menu>

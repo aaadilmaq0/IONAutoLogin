@@ -1,0 +1,36 @@
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <PreferenceCategory android:title="General">
+        <Preference
+            android:key="studentID"
+            android:summary="summary1"
+            android:title="ION ID's" />
+        <!--TODO in V2-->
+        <!--<SwitchPreference  -->
+        <!--android:defaultValue="false"-->
+        <!--android:key="notifications_enabled"-->
+        <!--android:title="Ask to login as notification" />-->
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="Auto Check">
+        <SwitchPreference
+            android:defaultValue="false"
+            android:key="check_enabled"
+            android:title="Auto Check" />
+        <!--TODO in V2-->
+        <!--<SwitchPreference-->
+            <!--android:defaultValue="false"-->
+            <!--android:key="check_wifi"-->
+            <!--android:title="Login On Wifi Changes" />-->
+        <ListPreference
+            android:defaultValue="2"
+            android:entries="@array/check_timeInterval"
+            android:entryValues="@array/check_timeInterval_values"
+            android:key="check_list"
+            android:negativeButtonText="Cancel"
+            android:positiveButtonText="Save"
+            android:title="Time Interval b/w checks" />
+
+
+    </PreferenceCategory>
+
+</PreferenceScreen>

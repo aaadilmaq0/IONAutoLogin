@@ -1,0 +1,14 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/action_idList_add"
+        android:orderInCategory="100"
+        android:title="ADD USER"
+        app:showAsAction="ifRoom" />
+    <!--<item-->
+    <!--android:id="@+id/search"-->
+    <!--android:title="@string/search_title"-->
+    <!--android:icon="@drawable/"-->
+    <!--app:showAsAction="collapseActionView|ifRoom"-->
+    <!--app:actionViewClass="android.support.v7.widget.SearchView"/>-->
+</menu>
