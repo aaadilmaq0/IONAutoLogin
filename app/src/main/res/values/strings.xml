@@ -157,4 +157,7 @@
     <string name="status_checkingInternet">Checking Internet!</string>
     <string name="status_idle">Idle</string>
     <string name="status_login">Attempting to Login!</string>
+    <string name="appwidget_text">EXAMPLE</string>
+    <string name="configure">Configure</string>
+    <string name="add_widget">Add widget</string>
 </resources>

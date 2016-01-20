@@ -278,7 +278,7 @@ public class MainActivity extends AppCompatActivity {
     public class preferenceFragment extends PreferenceFragment {
         Preference IDPref;
         SwitchPreference sp_autocheck;
-        ListPreference lp;
+         ListPreference lp;
         SwitchPreference check_wifi;
         private ListPreference check_list;
 

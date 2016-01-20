@@ -29,8 +29,6 @@
             android:label="@string/title_activity_settings"
             android:parentActivityName=".MainActivity"
             android:theme="@style/AppTheme.NoActionBar">
-
-
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="login.kunal.com.loginautomatically.MainActivity" />
@@ -46,9 +44,18 @@
         <activity
             android:name=".ScrollingActivity"
             android:label="@string/title_activity_scrolling"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@style/AppTheme.NoActionBar"></activity>
 
-        </activity>
+        <receiver android:name=".LoginWidget">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/login_widget_info" />
+        </receiver>
+
     </application>
 
 </manifest>
