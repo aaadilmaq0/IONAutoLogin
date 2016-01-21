@@ -24,9 +24,3 @@ Developement
 * Commit your changes: git commit -am 'Add some feature'
 * Push to the branch: git push origin my-new-feature
 * Submit a pull request :D
-
-Looks
--------
-More templates to come!
-
-<img alt="Screenshot" src="https://raw.githubusercontent.com/kunall17/EntryScreenManager/screenshots/screen.png" width="432" height="712" /> 
