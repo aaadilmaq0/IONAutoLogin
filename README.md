@@ -1,14 +1,11 @@
-# IONAutoLogin
+Auto Login For Android
+================
 
 This has open beta testing running! 
 https://play.google.com/apps/testing/login.kunal.com.loginautomatically
 
 Please give your feedbacks/suggestions.. 
 Contribute to the code if you like this! 
-
-
-Auto Login For Android
-================
 
 * [Usage And Features](#usage)
 * [Development Setup](#Developement)
