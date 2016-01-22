@@ -1,19 +1,17 @@
-package login.kunal.com.loginautomatically;
+package com.kunall17.ionautologin;
 
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.text.method.CharacterPickerDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import login.kunal.com.loginautomatically.Functions.Logger;
+import com.kunall17.ionautologin.Functions.Logger;
+
+import com.kunall17.ionautologin.R;
 
 public class LogActivity extends AppCompatActivity {
 

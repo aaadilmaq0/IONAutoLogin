@@ -1,4 +1,4 @@
-package login.kunal.com.loginautomatically.Functions;
+package com.kunall17.ionautologin.Functions;
 
 import android.os.Parcel;
 import android.os.Parcelable;

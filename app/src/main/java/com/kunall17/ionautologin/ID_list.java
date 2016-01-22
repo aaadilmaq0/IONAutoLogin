@@ -1,15 +1,12 @@
-package login.kunal.com.loginautomatically;
+package com.kunall17.ionautologin;
 
 import android.app.Dialog;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -18,14 +15,15 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import java.sql.SQLIntegrityConstraintViolationException;
-import java.util.ArrayList;
 import java.util.List;
 
-import login.kunal.com.loginautomatically.Functions.Encryption;
-import login.kunal.com.loginautomatically.Functions.Logger;
-import login.kunal.com.loginautomatically.Functions.SQLiteDatabaseAdapter;
-import login.kunal.com.loginautomatically.Functions.SharedPreferencesClass;
-import login.kunal.com.loginautomatically.Functions.User;
+import com.kunall17.ionautologin.Functions.Encryption;
+import com.kunall17.ionautologin.Functions.Logger;
+import com.kunall17.ionautologin.Functions.SQLiteDatabaseAdapter;
+import com.kunall17.ionautologin.Functions.SharedPreferencesClass;
+import com.kunall17.ionautologin.Functions.User;
+
+import com.kunall17.ionautologin.R;
 
 public class ID_list extends AppCompatActivity {
     List<User> users;

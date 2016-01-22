@@ -1,4 +1,4 @@
-package login.kunal.com.loginautomatically;
+package com.kunall17.ionautologin;
 
 import android.app.Activity;
 import android.content.Context;
@@ -13,9 +13,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
-import login.kunal.com.loginautomatically.Functions.SQLiteDatabaseAdapter;
-import login.kunal.com.loginautomatically.Functions.SharedPreferencesClass;
-import login.kunal.com.loginautomatically.Functions.User;
+import com.kunall17.ionautologin.Functions.SQLiteDatabaseAdapter;
+import com.kunall17.ionautologin.Functions.SharedPreferencesClass;
+import com.kunall17.ionautologin.Functions.User;
+
+import com.kunall17.ionautologin.R;
 
 import java.util.List;
 

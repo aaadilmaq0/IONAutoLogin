@@ -1,13 +1,11 @@
-package login.kunal.com.loginautomatically.Functions;
+package com.kunall17.ionautologin.Functions;
 
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
-import android.database.DatabaseErrorHandler;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 

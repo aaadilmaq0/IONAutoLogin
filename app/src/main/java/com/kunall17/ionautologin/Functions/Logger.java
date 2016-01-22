@@ -1,12 +1,9 @@
-package login.kunal.com.loginautomatically.Functions;
+package com.kunall17.ionautologin.Functions;
 
-import android.content.Context;
 import android.util.Log;
-import android.widget.TextClock;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 

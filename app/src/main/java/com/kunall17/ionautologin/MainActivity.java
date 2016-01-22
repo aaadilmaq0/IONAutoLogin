@@ -1,4 +1,4 @@
-package login.kunal.com.loginautomatically;
+package com.kunall17.ionautologin;
 
 import android.animation.ArgbEvaluator;
 import android.animation.ValueAnimator;
@@ -6,7 +6,6 @@ import android.annotation.TargetApi;
 import android.app.Dialog;
 import android.content.Intent;
 import android.content.res.ColorStateList;
-import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -17,7 +16,6 @@ import android.preference.Preference;
 import android.preference.PreferenceFragment;
 import android.preference.SwitchPreference;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -31,13 +29,15 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import login.kunal.com.loginautomatically.Functions.CheckInternet;
-import login.kunal.com.loginautomatically.Functions.Logger;
-import login.kunal.com.loginautomatically.Functions.LoginConstants;
-import login.kunal.com.loginautomatically.Functions.LoginThread;
-import login.kunal.com.loginautomatically.Functions.SQLiteDatabaseAdapter;
-import login.kunal.com.loginautomatically.Functions.SharedPreferencesClass;
-import login.kunal.com.loginautomatically.Functions.differentFunctions;
+import com.kunall17.ionautologin.Functions.CheckInternet;
+import com.kunall17.ionautologin.Functions.Logger;
+import com.kunall17.ionautologin.Functions.LoginConstants;
+import com.kunall17.ionautologin.Functions.LoginThread;
+import com.kunall17.ionautologin.Functions.SQLiteDatabaseAdapter;
+import com.kunall17.ionautologin.Functions.SharedPreferencesClass;
+import com.kunall17.ionautologin.Functions.differentFunctions;
+
+import com.kunall17.ionautologin.R;
 
 public class MainActivity extends AppCompatActivity {
     private Toolbar mToolbar;

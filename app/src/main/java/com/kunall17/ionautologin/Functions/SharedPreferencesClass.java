@@ -1,4 +1,4 @@
-package login.kunal.com.loginautomatically.Functions;
+package com.kunall17.ionautologin.Functions;
 
 import android.content.Context;
 import android.content.SharedPreferences;

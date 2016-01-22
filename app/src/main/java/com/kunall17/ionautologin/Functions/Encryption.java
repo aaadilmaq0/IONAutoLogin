@@ -1,4 +1,4 @@
-package login.kunal.com.loginautomatically.Functions;
+package com.kunall17.ionautologin.Functions;
 
 /**
  * Created by kunall17 on 12/23/15.

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="login.kunal.com.loginautomatically">
+    package="com.kunall17.ionautologin">
 
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
@@ -14,7 +14,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".MainActivity"
+            android:name="com.kunall17.ionautologin.MainActivity"
             android:label="@string/title_activity_main"
             android:launchMode="singleTop"
             android:theme="@style/AppTheme.NoActionBar">
@@ -27,18 +27,18 @@
         <activity
             android:name=".SettingsActivity"
             android:label="@string/title_activity_settings"
-            android:parentActivityName=".MainActivity"
+            android:parentActivityName="com.kunall17.ionautologin.MainActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="login.kunal.com.loginautomatically.MainActivity" />
+                android:value="com.kunall17.ionautologin.MainActivity" />
         </activity>
         <activity
-            android:name=".LogActivity"
+            android:name="com.kunall17.ionautologin.LogActivity"
             android:label="@string/title_activity_log"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".ID_list"
+            android:name="com.kunall17.ionautologin.ID_list"
             android:label="@string/title_activity_id_list"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
@@ -46,7 +46,7 @@
             android:label="@string/title_activity_scrolling"
             android:theme="@style/AppTheme.NoActionBar"></activity>
 
-        <receiver android:name=".LoginWidget">
+        <receiver android:name="com.kunall17.ionautologin.LoginWidget">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
             </intent-filter>

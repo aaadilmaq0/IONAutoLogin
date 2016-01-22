@@ -1,4 +1,4 @@
-package login.kunal.com.loginautomatically;
+package com.kunall17.ionautologin;
 
 import org.junit.Test;
 

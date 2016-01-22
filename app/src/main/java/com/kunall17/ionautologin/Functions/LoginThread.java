@@ -1,8 +1,6 @@
-package login.kunal.com.loginautomatically.Functions;
+package com.kunall17.ionautologin.Functions;
 
 import android.content.Context;
-import android.net.Network;
-import android.os.AsyncTask;
 import android.util.Log;
 import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
@@ -10,21 +8,7 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.Toast;
 
-import com.squareup.okhttp.Connection;
-
-import org.w3c.dom.Document;
-import org.xml.sax.InputSource;
-
-import java.io.StringReader;
-
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.xpath.XPathConstants;
-import javax.xml.xpath.XPathExpression;
-import javax.xml.xpath.XPathExpressionException;
-import javax.xml.xpath.XPathFactory;
-
-import login.kunal.com.loginautomatically.MainActivity;
-import login.kunal.com.loginautomatically.R;
+import com.kunall17.ionautologin.R;
 
 /**
  * Created by kunall17 on 12/21/15.
