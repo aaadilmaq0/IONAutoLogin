@@ -14,7 +14,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name="com.kunall17.ionautologin.MainActivity"
+            android:name=".MainActivity"
             android:label="@string/title_activity_main"
             android:launchMode="singleTop"
             android:theme="@style/AppTheme.NoActionBar">
@@ -27,26 +27,26 @@
         <activity
             android:name=".SettingsActivity"
             android:label="@string/title_activity_settings"
-            android:parentActivityName="com.kunall17.ionautologin.MainActivity"
+            android:parentActivityName=".MainActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.kunall17.ionautologin.MainActivity" />
         </activity>
         <activity
-            android:name="com.kunall17.ionautologin.LogActivity"
+            android:name=".LogActivity"
             android:label="@string/title_activity_log"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name="com.kunall17.ionautologin.ID_list"
+            android:name=".ID_list"
             android:label="@string/title_activity_id_list"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".ScrollingActivity"
             android:label="@string/title_activity_scrolling"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
 
-        <receiver android:name="com.kunall17.ionautologin.LoginWidget">
+        <receiver android:name=".LoginWidget">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
             </intent-filter>
@@ -55,7 +55,6 @@
                 android:name="android.appwidget.provider"
                 android:resource="@xml/login_widget_info" />
         </receiver>
-
     </application>
 
 </manifest>

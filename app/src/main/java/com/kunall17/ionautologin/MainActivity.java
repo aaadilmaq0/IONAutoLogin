@@ -28,6 +28,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.kunall17.ionautologin.Functions.CheckInternet;
 import com.kunall17.ionautologin.Functions.Logger;
@@ -123,8 +124,17 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         fab.setBackgroundTintList(ColorStateList.valueOf(color_red));
-
+        System.out.println(getIntent().getStringArrayExtra("mail"));
+        if (getIntent().getBooleanExtra("checkRightNow", false)) {
+            log.addToLog("checkby widget");
+            loginThread.attemptToLogin();
+            Intent startMain = new Intent(Intent.ACTION_MAIN);
+            startMain.addCategory(Intent.CATEGORY_HOME);
+            startMain.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(startMain);
+        }
     }
+
 
     private void setupListener() {
         listener = new differentFunctions() {
@@ -135,6 +145,7 @@ public class MainActivity extends AppCompatActivity {
                 switch (LOGIN_STATE) {
                     case LoginConstants.LOGIN_NET_WORKING:
                         textUpdate(CONNECTED);
+                        Toast.makeText(MainActivity.this, "Logged In!", Toast.LENGTH_SHORT).show();
                         break;
                     case LoginConstants.LOGIN_NET_NOTWORKING:
                         textUpdate(NOT_CONNECTED);
@@ -278,7 +289,7 @@ public class MainActivity extends AppCompatActivity {
     public class preferenceFragment extends PreferenceFragment {
         Preference IDPref;
         SwitchPreference sp_autocheck;
-         ListPreference lp;
+        ListPreference lp;
         SwitchPreference check_wifi;
         private ListPreference check_list;
 
@@ -338,6 +349,8 @@ public class MainActivity extends AppCompatActivity {
 //            lp.setEntries(entries);
 //            lp.setDefaultValue("1");
 //            lp.setEntryValues(entryValues);
+
+
         }
 
         @Override
