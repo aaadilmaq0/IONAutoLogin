@@ -1,8 +1,7 @@
 Auto Login For Android
 ================
 
-This has open beta testing running! 
-https://play.google.com/apps/testing/login.kunal.com.loginautomatically
+This has open beta testing here - https://play.google.com/apps/testing/com.kunall17.ionautologin
 
 Please give your feedbacks/suggestions.. 
 Contribute to the code if you like this! 
