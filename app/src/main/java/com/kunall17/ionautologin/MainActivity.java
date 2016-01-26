@@ -4,10 +4,15 @@ import android.animation.ArgbEvaluator;
 import android.animation.ValueAnimator;
 import android.annotation.TargetApi;
 import android.app.Dialog;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.res.ColorStateList;
 import android.graphics.drawable.ColorDrawable;
+import android.net.NetworkInfo;
 import android.net.Uri;
+import android.net.wifi.WifiManager;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.CountDownTimer;
@@ -38,7 +43,6 @@ import com.kunall17.ionautologin.Functions.SQLiteDatabaseAdapter;
 import com.kunall17.ionautologin.Functions.SharedPreferencesClass;
 import com.kunall17.ionautologin.Functions.differentFunctions;
 
-import com.kunall17.ionautologin.R;
 
 public class MainActivity extends AppCompatActivity {
     private Toolbar mToolbar;
@@ -65,6 +69,7 @@ public class MainActivity extends AppCompatActivity {
     int color_green;
 
     differentFunctions listener;
+    private boolean startFromWidget;
 
     public void LoginAutomatically() {
         loginThread.attemptToLogin();
@@ -87,7 +92,15 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         getWindow().requestFeature(Window.FEATURE_PROGRESS);
+        startFromWidget = getIntent().getBooleanExtra("startFromWidget", false);
+        if (startFromWidget) {
+            Intent main = new Intent(Intent.ACTION_MAIN);
+            main.addCategory(Intent.CATEGORY_HOME);
+            main.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(main);
+        }
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         log = Logger.getInstance();
@@ -124,17 +137,56 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         fab.setBackgroundTintList(ColorStateList.valueOf(color_red));
-        System.out.println(getIntent().getStringArrayExtra("mail"));
-        if (getIntent().getBooleanExtra("checkRightNow", false)) {
-            log.addToLog("checkby widget");
-            loginThread.attemptToLogin();
-            Intent startMain = new Intent(Intent.ACTION_MAIN);
-            startMain.addCategory(Intent.CATEGORY_HOME);
-            startMain.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            startActivity(startMain);
+
+
+        System.out.println("Something here-" + startFromWidget);
+
+        if (startFromWidget) {
+            startedFromWidget();
+
         }
     }
 
+    public void startedFromWidget() {
+        final WifiManager wifiManager = (WifiManager) getSystemService(Context.WIFI_SERVICE);
+
+        System.out.println("Something here-" + wifiManager.getConnectionInfo().getSSID());
+
+        if (wifiManager.getConnectionInfo().getSSID().contains("ION")) {
+            System.out.println("Something here-" + wifiManager.getConnectionInfo().getSSID());
+            LoginAutomatically();
+        } else {
+            System.out.println("Something here-disabled!");
+            wifiManager.setWifiEnabled(true);
+            this.registerReceiver(mWifiStateChangedReceiver, new IntentFilter(WifiManager.NETWORK_STATE_CHANGED_ACTION));
+        }
+
+    }
+
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        startFromWidget = getIntent().getBooleanExtra("startFromWidget", false);
+        System.out.println("SomethingnewIntenthere-" + startFromWidget);
+        if (startFromWidget) startedFromWidget();
+
+    }
+
+    private BroadcastReceiver mWifiStateChangedReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            // TODO Auto-generated method stub
+            if (intent.getAction().equals(WifiManager.NETWORK_STATE_CHANGED_ACTION)) {
+                NetworkInfo info1 = intent.getParcelableExtra(WifiManager.EXTRA_NETWORK_INFO);
+                boolean connected = info1.isConnected();
+                if (connected) {
+                    LoginAutomatically();
+                    Log.d("somethingmore-", "attempted login!");
+                }
+            }
+
+        }
+    };
 
     private void setupListener() {
         listener = new differentFunctions() {
@@ -146,9 +198,25 @@ public class MainActivity extends AppCompatActivity {
                     case LoginConstants.LOGIN_NET_WORKING:
                         textUpdate(CONNECTED);
                         Toast.makeText(MainActivity.this, "Logged In!", Toast.LENGTH_SHORT).show();
+
+
                         break;
                     case LoginConstants.LOGIN_NET_NOTWORKING:
                         textUpdate(NOT_CONNECTED);
+                        Toast.makeText(MainActivity.this, "Cannot Log In!", Toast.LENGTH_SHORT).show();
+                        if (startFromWidget) { //minimize the app
+                            Intent main = new Intent(Intent.ACTION_MAIN);
+                            main.addCategory(Intent.CATEGORY_HOME);
+                            main.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                            startActivity(main);
+                        }
+                        try {
+                            if (mWifiStateChangedReceiver != null)
+                                mWifiStateChangedReceiver.abortBroadcast();
+
+                        } catch (IllegalStateException e) {
+                            System.out.println(e.toString());
+                        }
                         LoginAutomatically();
                         break;
                     case LoginConstants.LOGIN_DEACTIVATED:
@@ -302,7 +370,6 @@ public class MainActivity extends AppCompatActivity {
 
             IDPref = findPreference("studentID");
 
-
             check_list = (ListPreference) findPreference("check_list");
             sp_autocheck = (SwitchPreference) findPreference("check_enabled");
 
@@ -319,12 +386,10 @@ public class MainActivity extends AppCompatActivity {
                 @Override
                 public boolean onPreferenceChange(Preference preference, Object o) {
                     if (sp_autocheck.isChecked()) {
-                        check_wifi.setEnabled(true);
                         check_list.setEnabled(true);
                         startTimer();
                     } else {
                         if (cdt != null) cdt.cancel();
-                        check_wifi.setEnabled(false);
                         check_list.setEnabled(false);
                     }
                     return true;

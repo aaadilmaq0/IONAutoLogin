@@ -20,18 +20,8 @@
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-        <activity
-            android:name=".SettingsActivity"
-            android:label="@string/title_activity_settings"
-            android:parentActivityName=".MainActivity"
-            android:theme="@style/AppTheme.NoActionBar">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.kunall17.ionautologin.MainActivity" />
         </activity>
         <activity
             android:name=".LogActivity"
@@ -41,10 +31,7 @@
             android:name=".ID_list"
             android:label="@string/title_activity_id_list"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".ScrollingActivity"
-            android:label="@string/title_activity_scrolling"
-            android:theme="@style/AppTheme.NoActionBar" />
+
 
         <receiver android:name=".LoginWidget">
             <intent-filter>
@@ -55,6 +42,8 @@
                 android:name="android.appwidget.provider"
                 android:resource="@xml/login_widget_info" />
         </receiver>
+
     </application>
 
 </manifest>
+
