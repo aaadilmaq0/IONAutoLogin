@@ -4,6 +4,7 @@
     android:initialLayout="@layout/login_widget"
     android:minHeight="40dp"
     android:minWidth="40dp"
-    android:previewImage="@drawable/ic_notifications_black_24dp"
+
+    android:previewImage="@drawable/ic_launcher"
     android:updatePeriodMillis="86400000"
     android:widgetCategory="home_screen"></appwidget-provider>
