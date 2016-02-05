@@ -22,6 +22,11 @@
     <!--app:showAsAction="never" />-->
 
     <item
+        android:id="@+id/action_help"
+        android:orderInCategory="100"
+        android:title="Help"
+        app:showAsAction="never" />
+    <item
         android:id="@+id/action_contact"
         android:autoLink="web|email"
         android:orderInCategory="100"

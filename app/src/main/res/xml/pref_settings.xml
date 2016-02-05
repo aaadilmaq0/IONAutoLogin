@@ -18,11 +18,12 @@
             android:title="Auto Check" />
         <!--TODO in V2-->
         <!--<SwitchPreference-->
-            <!--android:defaultValue="false"-->
-            <!--android:key="check_wifi"-->
-            <!--android:title="Login On Wifi Changes" />-->
+        <!--android:defaultValue="false"-->
+        <!--android:key="check_wifi"-->
+        <!--android:title="Login On Wifi Changes" />-->
         <ListPreference
             android:defaultValue="2"
+            android:enabled="false"
             android:entries="@array/check_timeInterval"
             android:entryValues="@array/check_timeInterval_values"
             android:key="check_list"

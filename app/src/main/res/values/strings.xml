@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">LoginAutomatically</string>
+    <string name="app_name">ION AutoLogin</string>
     <string name="title_activity_main">ION Auto Login</string>
     <string name="title_activity_main2">Main2Activity</string>
     <string name="title_activity_settings">Settings</string>

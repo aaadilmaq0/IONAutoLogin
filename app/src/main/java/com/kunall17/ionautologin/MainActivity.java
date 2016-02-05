@@ -6,6 +6,7 @@ import android.annotation.TargetApi;
 import android.app.Dialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.res.ColorStateList;
@@ -21,6 +22,8 @@ import android.preference.Preference;
 import android.preference.PreferenceFragment;
 import android.preference.SwitchPreference;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.TextInputLayout;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -41,7 +44,10 @@ import com.kunall17.ionautologin.Functions.LoginConstants;
 import com.kunall17.ionautologin.Functions.LoginThread;
 import com.kunall17.ionautologin.Functions.SQLiteDatabaseAdapter;
 import com.kunall17.ionautologin.Functions.SharedPreferencesClass;
+import com.kunall17.ionautologin.Functions.User;
 import com.kunall17.ionautologin.Functions.differentFunctions;
+
+import java.sql.SQLIntegrityConstraintViolationException;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -85,6 +91,67 @@ public class MainActivity extends AppCompatActivity {
         } else {
             defaultUsername = "";
             log.addToLog("ID NOT FOUND");
+
+
+            final Dialog dialog = new Dialog(MainActivity.this);
+            dialog.setContentView(R.layout.custom_dialog);
+            dialog.setTitle("ION ID");
+            dialog.setCancelable(false);
+            final EditText username_et = (EditText) dialog.findViewById(R.id.userName_ET);
+            final EditText pass_et = (EditText) dialog.findViewById(R.id.pass_ET);
+            final TextView textView = (TextView) dialog.findViewById(R.id.textView);
+            textView.setText("You need to save a default ID and password first! \n Don't worry your ID and Password are safe");
+            Button cancel_btn = (Button) dialog.findViewById(R.id.cancel_btn);
+            Button save_btn = (Button) dialog.findViewById(R.id.save_btn);
+            final TextInputLayout user_til = (TextInputLayout) dialog.findViewById(R.id.name_txt_layout);
+            final TextInputLayout pass_til = (TextInputLayout) dialog.findViewById(R.id.pass_txt_layout);
+            // if button is clicked, close the custom dialog
+
+
+            cancel_btn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (spc.getDefaultID() == "" || spc.getDefaultID() == null) {
+                        Toast.makeText(MainActivity.this, "You need to save a default ID first!", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+                    dialog.dismiss();
+                }
+            });
+
+            save_btn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (username_et.getText().toString() == "") {
+                        user_til.setError("Enter UserName");
+                        return;
+                    }
+                    if (pass_et.getText().toString() == "") {
+                        pass_til.setError("Enter Password");
+                        return;
+                    }
+                    try {
+                        int a = databaseAdapter.insertData(username_et.getText().toString(), (pass_et.getText().toString()));
+                        System.out.println("long-" + a);
+                        if (a != -1) {
+                            spc.saveString(SharedPreferencesClass.SP_DEFAULT, username_et.getText().toString());
+                            log.addToLog("userAdded-" + username_et.getText().toString());
+                            defaultUsername = username_et.getText().toString();
+                            loginThread.changeCred(defaultUsername, defaultPassword);
+
+                            preferenceFragment.findPreference("studentID").setSummary("Default- " + username_et.getText().toString());
+                        }
+
+                    } catch (SQLIntegrityConstraintViolationException e) {
+                        Toast.makeText(MainActivity.this, "This ID already Found!", Toast.LENGTH_SHORT).show();
+                        username_et.setText("");
+                        pass_et.setText("");
+                    }
+                    Toast.makeText(MainActivity.this, "Saved!", Toast.LENGTH_SHORT).show();
+                    dialog.dismiss();
+                }
+            });
+            dialog.show();
         }
 
 
@@ -129,7 +196,8 @@ public class MainActivity extends AppCompatActivity {
 //        saveCredentials();
         color_red = getResources().getColor(R.color.not_connected_red);
         color_green = getResources().getColor(R.color.connected_green);
-        getFragmentManager().beginTransaction().replace(R.id.content_frame, new preferenceFragment()).commit();
+        preferenceFragment = new preferenceFragment();
+        getFragmentManager().beginTransaction().replace(R.id.content_frame, preferenceFragment).commit();
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -146,6 +214,8 @@ public class MainActivity extends AppCompatActivity {
 
         }
     }
+
+    PreferenceFragment preferenceFragment;
 
     public void startedFromWidget() {
         final WifiManager wifiManager = (WifiManager) getSystemService(Context.WIFI_SERVICE);
@@ -298,6 +368,26 @@ public class MainActivity extends AppCompatActivity {
             startActivity(i);
         } else if (id == R.id.action_login) {
             loginThread.attemptToLogin();
+        } else if (id == R.id.action_help) {
+            final AlertDialog.Builder dlgAlert = new AlertDialog.Builder(this);
+            dlgAlert.setMessage("Three ways to login:-\n" +
+                    "\n" +
+                    "1. Add an widget to your homescreen which automatically turn's on the wifi if off and attempts to login with the default ID \n" +
+                    "\n" +
+                    "2. Press the bottom most circle button to check if internet working and then login\n" +
+                    "\n" +
+                    "3. Press the icon behind this menu then you can directly login!");
+            dlgAlert.setTitle("How to use?");
+            dlgAlert.setPositiveButton("OK", null);
+            dlgAlert.setCancelable(true);
+            dlgAlert.setPositiveButton("Ok",
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            //dismiss the dialog
+                            dialog.dismiss();
+                        }
+                    });
+            dlgAlert.create().show();
         }
         return super.onOptionsItemSelected(item);
     }
@@ -355,7 +445,7 @@ public class MainActivity extends AppCompatActivity {
 
     @TargetApi(Build.VERSION_CODES.HONEYCOMB)
     public class preferenceFragment extends PreferenceFragment {
-        Preference IDPref;
+        public Preference IDPref;
         SwitchPreference sp_autocheck;
         ListPreference lp;
         SwitchPreference check_wifi;
@@ -369,6 +459,7 @@ public class MainActivity extends AppCompatActivity {
             setHasOptionsMenu(true);
 
             IDPref = findPreference("studentID");
+
 
             check_list = (ListPreference) findPreference("check_list");
             sp_autocheck = (SwitchPreference) findPreference("check_enabled");
@@ -385,7 +476,7 @@ public class MainActivity extends AppCompatActivity {
             sp_autocheck.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
                 @Override
                 public boolean onPreferenceChange(Preference preference, Object o) {
-                    if (sp_autocheck.isChecked()) {
+                    if (!sp_autocheck.isChecked()) {
                         check_list.setEnabled(true);
                         startTimer();
                     } else {
@@ -428,13 +519,13 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public void onResume() {
             super.onResume();
-            saveCredentials();
+//            saveCredentials();
             loginThread.changeCred(defaultUsername, defaultPassword);
             IDPref.setSummary("Default- " + spc.getDefaultID());
 
         }
 
-        private void getAndSetDefaults() {
+        public void getAndSetDefaults() {
             if (spc.getDefaultID() != null && databaseAdapter.ifUserNameExists(spc.getDefaultID())) {
                 IDPref.setSummary("Default- " + spc.getDefaultID());
             }
