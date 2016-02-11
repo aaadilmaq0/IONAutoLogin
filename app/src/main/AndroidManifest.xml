@@ -44,6 +44,9 @@
                 android:resource="@xml/login_widget_info" />
         </receiver>
 
+        <meta-data
+            android:name="io.fabric.ApiKey"
+            android:value="2729882f9b8eabed2e545a2d3a18221196171186" />
     </application>
 
 </manifest>

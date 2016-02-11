@@ -27,6 +27,7 @@ public class LoginWidget extends AppWidgetProvider {
 
         Toast.makeText(context, "Widget Loaded", Toast.LENGTH_SHORT).show();
         views = new RemoteViews(context.getPackageName(), R.layout.login_widget);
+
         Intent newintent = new Intent(context, MainActivity.class);
         newintent.putExtra("startFromWidget", true);
         newintent.putExtra("startFromWidget1", "zxc");
