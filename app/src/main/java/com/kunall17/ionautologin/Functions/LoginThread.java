@@ -52,7 +52,7 @@ public class LoginThread {
         webView.getSettings().setJavaScriptCanOpenWindowsAutomatically(false);
         webView.setWebViewClient(new WebViewClient() {
             public void onReceivedError(WebView view, int errorCode, String description, String failingUrl) {
-                Toast.makeText(context, "Oh no! " + description, Toast.LENGTH_SHORT).show();
+//                Toast.makeText(context, "Oh no! " + description, Toast.LENGTH_SHORT).show();
             }
 
 

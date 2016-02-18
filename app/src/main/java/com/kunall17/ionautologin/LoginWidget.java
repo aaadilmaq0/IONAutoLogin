@@ -25,7 +25,7 @@ public class LoginWidget extends AppWidgetProvider {
     static void updateAppWidget(Context context, AppWidgetManager appWidgetManager,
                                 int appWidgetId) {
 
-        Toast.makeText(context, "Widget Loaded", Toast.LENGTH_SHORT).show();
+//        Toast.makeText(context, "Widget Loaded", Toast.LENGTH_SHORT).show();
         views = new RemoteViews(context.getPackageName(), R.layout.login_widget);
 
         Intent newintent = new Intent(context, MainActivity.class);
