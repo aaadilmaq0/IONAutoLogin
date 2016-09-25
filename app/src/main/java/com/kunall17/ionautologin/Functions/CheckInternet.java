@@ -4,9 +4,9 @@ import android.content.Context;
 import android.os.AsyncTask;
 
 import com.kunall17.ionautologin.R;
-import com.squareup.okhttp.OkHttpClient;
-import com.squareup.okhttp.Request;
-import com.squareup.okhttp.Response;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
 
 import java.net.SocketTimeoutException;
 
@@ -41,7 +41,7 @@ public class CheckInternet extends AsyncTask<Boolean, Boolean, Boolean> {
             Response response = client.newCall(request).execute();
 
 //            SocketTimeoutException: timeout
-            if (url == response.request().urlString() && response.code() == 200) {
+            if (url.equals(response.request().url().toString()) && response.code() == 200) {
                 return true;
             }
         } catch (SocketTimeoutException ste) {
