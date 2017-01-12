@@ -14,8 +14,8 @@ import com.kunall17.ionautologin.R;
  * Created by kunall17 on 12/21/15.
  */
 public class LoginThread {
-    private static final String URL_CLIENTLOGIN = "http://172.16.16.16/24online/webpages/clientlogin.jsp";
-    private static final String URL_AFTERLOGIN = "http://172.16.16.16/24online/servlet/E24onlineHTTPClient";
+    private static final String URL_CLIENTLOGIN = "https://mahe2.dvois.com/24online/webpages/clientlogin.jsp";
+    private static final String URL_AFTERLOGIN = "https://mahe2.dvois.com/24online/servlet/E24onlineHTTPClient";
     Context context;
     WebView webView;
     differentFunctions dfListener;
