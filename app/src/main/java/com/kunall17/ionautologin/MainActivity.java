@@ -10,7 +10,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.content.pm.PackageManager;
 import android.content.res.ColorStateList;
 import android.graphics.drawable.ColorDrawable;
 import android.net.NetworkInfo;
@@ -18,6 +17,7 @@ import android.net.Uri;
 import android.net.wifi.WifiManager;
 import android.os.AsyncTask;
 import android.os.Build;
+import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.preference.ListPreference;
 import android.preference.Preference;
@@ -28,7 +28,6 @@ import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
@@ -47,38 +46,51 @@ import com.kunall17.ionautologin.Functions.LoginConstants;
 import com.kunall17.ionautologin.Functions.LoginThread;
 import com.kunall17.ionautologin.Functions.SQLiteDatabaseAdapter;
 import com.kunall17.ionautologin.Functions.SharedPreferencesClass;
-import com.kunall17.ionautologin.Functions.User;
 import com.kunall17.ionautologin.Functions.differentFunctions;
 
 import java.sql.SQLIntegrityConstraintViolationException;
 
 
 public class MainActivity extends AppCompatActivity {
-    private Toolbar mToolbar;
+    final int CONNECTED = 1;
+    final int NOT_CONNECTED = 2;
     int minutes = 1;
     CountDownTimer cdt;
     Logger log;
     CheckInternet checkInternet;
     SharedPreferencesClass spc;
-    private SQLiteDatabaseAdapter database;
-    private String defaultUsername;
-    private String defaultPassword;
     LoginThread loginThread;
-    private SharedPreferencesClass preferencesClass;
     SQLiteDatabaseAdapter databaseAdapter;
     TextView internet_txt;
     FloatingActionButton fab;
+    int color_red;
+    int color_green;
+    differentFunctions listener;
+    PreferenceFragment preferenceFragment;
+    private Toolbar mToolbar;
+    private SQLiteDatabaseAdapter database;
+    private String defaultUsername;
+    private String defaultPassword;
+    private SharedPreferencesClass preferencesClass;
     private LinearLayout status_layout;
     private int currentapiVersion;
     private TextView status_txt;
-
-    final int CONNECTED = 1;
-    final int NOT_CONNECTED = 2;
-    int color_red;
-    int color_green;
-
-    differentFunctions listener;
     private boolean startFromWidget;
+    private BroadcastReceiver mWifiStateChangedReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            // TODO Auto-generated method stub
+            if (intent.getAction().equals(WifiManager.NETWORK_STATE_CHANGED_ACTION)) {
+                NetworkInfo info1 = intent.getParcelableExtra(WifiManager.EXTRA_NETWORK_INFO);
+                boolean connected = info1.isConnected();
+                if (connected) {
+                    LoginAutomatically();
+                    Log.d("somethingmore-", "attempted login!");
+                }
+            }
+
+        }
+    };
 
     public void LoginAutomatically() {
         loginThread.attemptToLogin();
@@ -226,8 +238,6 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    PreferenceFragment preferenceFragment;
-
     public void startedFromWidget() {
         final WifiManager wifiManager = (WifiManager) getSystemService(Context.WIFI_SERVICE);
 
@@ -252,22 +262,6 @@ public class MainActivity extends AppCompatActivity {
         if (startFromWidget) startedFromWidget();
 
     }
-
-    private BroadcastReceiver mWifiStateChangedReceiver = new BroadcastReceiver() {
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            // TODO Auto-generated method stub
-            if (intent.getAction().equals(WifiManager.NETWORK_STATE_CHANGED_ACTION)) {
-                NetworkInfo info1 = intent.getParcelableExtra(WifiManager.EXTRA_NETWORK_INFO);
-                boolean connected = info1.isConnected();
-                if (connected) {
-                    LoginAutomatically();
-                    Log.d("somethingmore-", "attempted login!");
-                }
-            }
-
-        }
-    };
 
     private void setupListener() {
         listener = new differentFunctions() {

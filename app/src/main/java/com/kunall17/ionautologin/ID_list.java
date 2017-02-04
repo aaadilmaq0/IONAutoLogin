@@ -14,16 +14,14 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import java.sql.SQLIntegrityConstraintViolationException;
-import java.util.List;
-
 import com.kunall17.ionautologin.Functions.Encryption;
 import com.kunall17.ionautologin.Functions.Logger;
 import com.kunall17.ionautologin.Functions.SQLiteDatabaseAdapter;
 import com.kunall17.ionautologin.Functions.SharedPreferencesClass;
 import com.kunall17.ionautologin.Functions.User;
 
-import com.kunall17.ionautologin.R;
+import java.sql.SQLIntegrityConstraintViolationException;
+import java.util.List;
 
 public class ID_list extends AppCompatActivity {
     List<User> users;

@@ -20,16 +20,16 @@ public class SQLiteDatabaseAdapter {
     Context context;
     SQLiteDatabase database;
 
+    private SQLiteDatabaseAdapter(Context context) {
+        this.context = context;
+        database = new SQLiteDatabase(context);
+    }
+
     public static SQLiteDatabaseAdapter getInstance(Context context) {
         if (instance == null) {
             instance = new SQLiteDatabaseAdapter(context);
         }
         return instance;
-    }
-
-    private SQLiteDatabaseAdapter(Context context) {
-        this.context = context;
-        database = new SQLiteDatabase(context);
     }
 
     public int insertData(String username, String password) throws java.sql.SQLIntegrityConstraintViolationException {
