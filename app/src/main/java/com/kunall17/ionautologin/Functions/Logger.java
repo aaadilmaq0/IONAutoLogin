@@ -11,8 +11,8 @@ import java.util.List;
  * Created by MAHE on 11/10/2015.
  */
 public class Logger {
-    private static Logger instance = null;
     public static List<String> logs;
+    private static Logger instance = null;
     int size = 0;
 
     protected Logger() {

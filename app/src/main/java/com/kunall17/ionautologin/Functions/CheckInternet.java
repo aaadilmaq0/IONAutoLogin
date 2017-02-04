@@ -4,11 +4,12 @@ import android.content.Context;
 import android.os.AsyncTask;
 
 import com.kunall17.ionautologin.R;
+
+import java.net.SocketTimeoutException;
+
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
-
-import java.net.SocketTimeoutException;
 
 
 /**

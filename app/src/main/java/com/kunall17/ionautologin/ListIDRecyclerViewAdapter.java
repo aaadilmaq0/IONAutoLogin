@@ -12,12 +12,9 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-
 import com.kunall17.ionautologin.Functions.SQLiteDatabaseAdapter;
 import com.kunall17.ionautologin.Functions.SharedPreferencesClass;
 import com.kunall17.ionautologin.Functions.User;
-
-import com.kunall17.ionautologin.R;
 
 import java.util.List;
 
@@ -28,6 +25,7 @@ public class ListIDRecyclerViewAdapter extends RecyclerView.Adapter<ListIDRecycl
     SharedPreferencesClass spc;
     String defaultID = "";
     int green;
+    SQLiteDatabaseAdapter databaseAdapter;
 
     public ListIDRecyclerViewAdapter(List<User> items, Context context) {
         Users = items;
@@ -44,9 +42,6 @@ public class ListIDRecyclerViewAdapter extends RecyclerView.Adapter<ListIDRecycl
                 .inflate(R.layout.listid_row, parent, false);
         return new ViewHolder(view);
     }
-
-    SQLiteDatabaseAdapter databaseAdapter;
-
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, final int position) {

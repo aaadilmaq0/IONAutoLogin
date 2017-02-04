@@ -6,7 +6,6 @@ import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
-import android.widget.Toast;
 
 import com.kunall17.ionautologin.R;
 
@@ -24,6 +23,30 @@ public class LoginThread {
     private String savedUsername;
 
 
+    public LoginThread(Context context, differentFunctions dfListener) {
+        SQLiteDatabaseAdapter databaseAdapter = SQLiteDatabaseAdapter.getInstance(context);
+        SharedPreferencesClass spc = SharedPreferencesClass.getInstance(context);
+        String username = spc.getDefaultID();
+        String password = databaseAdapter.getPassword(username);
+        this.context = context;
+        this.dfListener = dfListener;
+
+        setupBrowser();
+
+    }
+
+    public LoginThread(Context cont, String Username, String Password, differentFunctions listener) {
+        {
+            this.dfListener = listener;
+            this.context = cont;
+            this.log = Logger.getInstance();
+            this.savedPassword = Password;
+            this.savedUsername = Username;
+            setupBrowser();
+        }
+
+    }
+
     public void attemptToLogin() {
 
         dfListener.updateStatus(context.getString(R.string.status_login));
@@ -34,7 +57,6 @@ public class LoginThread {
         this.savedUsername = username;
         this.savedPassword = password;
     }
-
 
     private void setupBrowser() {
         webView = new WebView(context);
@@ -85,29 +107,5 @@ public class LoginThread {
         webView.getSettings().setCacheMode(WebSettings.LOAD_NO_CACHE);
         webView.getSettings().setJavaScriptEnabled(true);
         webView.getSettings().setJavaScriptCanOpenWindowsAutomatically(true);
-    }
-
-    public LoginThread(Context context, differentFunctions dfListener) {
-        SQLiteDatabaseAdapter databaseAdapter = SQLiteDatabaseAdapter.getInstance(context);
-        SharedPreferencesClass spc = SharedPreferencesClass.getInstance(context);
-        String username = spc.getDefaultID();
-        String password = databaseAdapter.getPassword(username);
-        this.context = context;
-        this.dfListener = dfListener;
-
-        setupBrowser();
-
-    }
-
-    public LoginThread(Context cont, String Username, String Password, differentFunctions listener) {
-        {
-            this.dfListener = listener;
-            this.context = cont;
-            this.log = Logger.getInstance();
-            this.savedPassword = Password;
-            this.savedUsername = Username;
-            setupBrowser();
-        }
-
     }
 }

@@ -11,12 +11,10 @@ import android.widget.TextView;
 
 import com.kunall17.ionautologin.Functions.Logger;
 
-import com.kunall17.ionautologin.R;
-
 public class LogActivity extends AppCompatActivity {
 
-    private RecyclerView recyclerView;
     Logger log;
+    private RecyclerView recyclerView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

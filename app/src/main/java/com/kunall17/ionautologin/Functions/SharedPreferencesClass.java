@@ -7,15 +7,13 @@ import android.content.SharedPreferences;
  * Created by kunall17 on 12/24/15.
  */
 public class SharedPreferencesClass {
-    String defaultID;
-    private static SharedPreferencesClass spc;
     public static final String SP_PATH = "settings_sp";
     public static final String SP_DEFAULT = "default_id";
     public static final String SP_MINUTES = "minutes";
     public static final String SP_autocheck = "autocheck_boolean";
-
-
+    private static SharedPreferencesClass spc;
     private static SharedPreferences sp;
+    String defaultID;
     Logger log;
 
     private SharedPreferencesClass(Context context) {
@@ -25,15 +23,15 @@ public class SharedPreferencesClass {
         defaultID = sp.getString(SP_DEFAULT, "");
     }
 
-    public Boolean getAutoCheckBoolean() {
-        return sp.getBoolean(SP_autocheck, false);
-    }
-
     public static SharedPreferencesClass getInstance(Context context) {
         if (spc == null) {
             spc = new SharedPreferencesClass(context);
         }
         return spc;
+    }
+
+    public Boolean getAutoCheckBoolean() {
+        return sp.getBoolean(SP_autocheck, false);
     }
 
     public void saveDefaultID(String defaultUsername) {
